@@ -1,0 +1,31 @@
+site_name: totw-cmake
+site_description: Collection of cmake tips
+site_author: Chris Thrasher
+
+theme:
+  name: 'material'
+  language: en
+  logo: 'images/BT.png'
+  feature:
+    tabs: true
+  palette:
+    primary: indigo  
+    accent: Deep Purple
+  font:
+    text: Ubuntu
+    code: Roboto Mono
+  
+repo_name: 'totw-cmake'
+repo_url: 'https://github.com/PickNikRobotics/totw-cmake'
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - codehilite:
+      guess_lang: true
+
+
+nav:
+    - Home: index.md
+    
