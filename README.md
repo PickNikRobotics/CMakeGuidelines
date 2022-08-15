@@ -1,2 +1,2 @@
-# totw-cmake
+# CMakeGuidelines
 Collection of useful cmake tips
