@@ -1,5 +1,5 @@
 # totw-cmake
-Collection of useful cmake tips
+Collection of useful cmake tips.
 
 ### 08/15/2022 `GenerateExportHeader`
 Use the [GenerateExportHeader](https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html) module to generate a header that defines macros for symbol export. GCC and Clang export all symbols by default but if you want better control over what symbols are public in your .so, you need to use non-portable compile attributes to specify that. This CMake module automates a lot of the busy work required to generate those macros and does so in a way that works on all platforms, including Windows.
