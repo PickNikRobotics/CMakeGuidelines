@@ -5,7 +5,6 @@ site_author: Chris Thrasher
 theme:
   name: 'material'
   language: en
-  logo: 'images/BT.png'
   feature:
     tabs: true
   palette:
