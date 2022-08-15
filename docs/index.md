@@ -1,4 +1,4 @@
-# totw-cmake
+# CMakeGuidelines
 Collection of useful cmake tips.
 
 ### 08/15/2022 `GenerateExportHeader`
