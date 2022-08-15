@@ -5,8 +5,8 @@ site_author: Chris Thrasher
 theme:
   name: 'material'
   language: en
-  feature:
-    tabs: true
+  features:
+    - navigation.tabs
   palette:
     primary: indigo  
     accent: Deep Purple
