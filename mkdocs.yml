@@ -1,14 +1,2 @@
-site_name: totw-cmake
-site_description: Collection of cmake tips
-site_author: Chris Thrasher
-
 theme:
   name: 'material'
-  language: en
-  
-repo_name: 'totw-cmake'
-repo_url: 'https://github.com/PickNikRobotics/totw-cmake'
-
-nav:
-    - Home: index.md
-    - References: references.md
