@@ -25,7 +25,3 @@ if(SOME_CONDITION)
 endif(SOME_CONDITION)
 ```
 Surprisingly the 2nd form is valid and behaves the same as the first. There’s no good reason to be repeating yourself in the endif call. It’s entirely unnecessary and just makes the code harder to read and maintain.
-
-## References
-- [Argon](https://github.com/ChrisThrasher/argon) has a good collection of cmake files
-- [CMake 202](https://docs.google.com/presentation/d/1GdnVETTJV6leoiyW-3E1iXD8R4OcrYY3Dhtjbx20bz4/edit?usp=sharing)
