@@ -27,4 +27,4 @@ markdown_extensions:
 
 nav:
     - Home: index.md
-    
+    - References: references.md
