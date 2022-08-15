@@ -1,3 +1,5 @@
 site_name: CMakeGuidelines
 theme:
   name: 'material'
+  features:
+    - navigation.instant
