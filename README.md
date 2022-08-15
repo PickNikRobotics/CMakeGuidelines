@@ -1,6 +1,5 @@
 # totw-cmake
 Collection of useful cmake tips
-[CMake 202](https://docs.google.com/presentation/d/1GdnVETTJV6leoiyW-3E1iXD8R4OcrYY3Dhtjbx20bz4/edit?usp=sharing)
 
 ### 08/15/2022 `GenerateExportHeader`
 Use the [GenerateExportHeader](https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html) module to generate a header that defines macros for symbol export. GCC and Clang export all symbols by default but if you want better control over what symbols are public in your .so, you need to use non-portable compile attributes to specify that. This CMake module automates a lot of the busy work required to generate those macros and does so in a way that works on all platforms, including Windows.
@@ -29,3 +28,4 @@ Surprisingly the 2nd form is valid and behaves the same as the first. There’s 
 
 ## References
 - [Argon](https://github.com/ChrisThrasher/argon) has a good collection of cmake files
+- [CMake 202](https://docs.google.com/presentation/d/1GdnVETTJV6leoiyW-3E1iXD8R4OcrYY3Dhtjbx20bz4/edit?usp=sharing)
