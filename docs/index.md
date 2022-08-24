@@ -1,6 +1,22 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 08/24/2022 `list(APPEND`
+Use `list(APPEND` to add elements to a list like so
+```
+set(MY_VARIABLE element1)
+...
+list(APPEND MY_VARIABLE element2 element3)
+```
+over the more verbose alternative
+```
+set(MY_VARIABLE element1)
+...
+set(MY_VARIABLE ${MY_VARIABLE} element2 element3)
+```
+Don’t repeat yourself if you don’t need to!
+I’ll also briefly mention `list(PREPEND` if you need to prepend instead of append to a list. `list` has tons of options for manipulating lists that are all better than trying to re-implement it by hand with lots of set calls.
+
 ### 08/15/2022 `GenerateExportHeader`
 Use the [GenerateExportHeader](https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html) module to generate a header that defines macros for symbol export. GCC and Clang export all symbols by default but if you want better control over what symbols are public in your .so, you need to use non-portable compile attributes to specify that. This CMake module automates a lot of the busy work required to generate those macros and does so in a way that works on all platforms, including Windows.
 I’ve used this before and it’s not too hard to get set up with. I’d definitely recommend this if you’re hardcore about not letter users depend on implementation details.
