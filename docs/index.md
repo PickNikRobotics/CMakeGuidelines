@@ -1,6 +1,10 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 08/26/2022
+Use `CMAKE_INTERPROCEDURAL_OPTIMIZATION` to easily enable link-time optimization (LTO) for a project. On the command line this looks like `-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON`. Hardcoding this for your project looks like `set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)`. CMake knows whether or not your compiler supports LTO so nothing should fail if your compiler does not support it.
+https://cmake.org/cmake/help/latest/variable/CMAKE_INTERPROCEDURAL_OPTIMIZATION.html
+
 ### 08/24/2022 `list(APPEND`
 Use `list(APPEND` to add elements to a list like so
 ```
