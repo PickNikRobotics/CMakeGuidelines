@@ -1,6 +1,22 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 08/29/2022
+Trailing slashes on paths are sometimes very meaningful. Take the two snippets
+```
+install(DIRECTORY include
+        DESTINATION .
+        COMPONENT libname_headers)
+```
+```
+install(DIRECTORY include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        COMPONENT libname_headers)
+```
+The first snippet installs the `include` directory *including a directory named* `include`.
+The second snippets installs the contents of the `include` directory but not the `include` directory itself. Both examples will do what you want the latter is preferable since it gives you more control over the directory into which your headers get installed. For all I know you want to install your headers into a directory named `headers` instead of `include` and the 2nd form gives you (and those installing your library) that control.
+Pay attention to those trailing backslahes next time you’re debugging install code!
+
 ### 08/26/2022
 Use `CMAKE_INTERPROCEDURAL_OPTIMIZATION` to easily enable link-time optimization (LTO) for a project. On the command line this looks like `-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON`. Hardcoding this for your project looks like `set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)`. CMake knows whether or not your compiler supports LTO so nothing should fail if your compiler does not support it.
 https://cmake.org/cmake/help/latest/variable/CMAKE_INTERPROCEDURAL_OPTIMIZATION.html
