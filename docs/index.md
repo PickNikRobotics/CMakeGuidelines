@@ -1,7 +1,17 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
-### 08/29/2022
+### 09/06/2022 Stop quoting paths!
+I was given old “wisdom” that if you dereference a variable that contains a path (for example, `CMAKE_SOURCE_DIR`) and that path contains a space, that one variable will actually expand into two arguments which are both broken paths. **This is not true**. Clone a project into a directory with a space in it and nothing will break. It’s totally fine and not something you need to defend against.
+For example,
+```
+install(DIRECTORY include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        COMPONENT mylib_headers)
+```
+There is no need to put quotes around `${CMAKE_INSTALL_INCLUDEDIR}`. I’d go ever farther to actively recommend against adding those quotes because it reinforces that old school paranoia and makes it harder to know when quotes are truly necessary. When I see quotes in CMake I expect that’s because the quotes are provably required because in some instances they are actually very important.
+
+### 08/29/2022 Use trailing forward slashes with intent
 Trailing slashes on paths are sometimes very meaningful. Take the two snippets
 ```
 install(DIRECTORY include
@@ -17,7 +27,7 @@ The first snippet installs the `include` directory *including a directory named*
 The second snippets installs the contents of the `include` directory but not the `include` directory itself. Both examples will do what you want the latter is preferable since it gives you more control over the directory into which your headers get installed. For all I know you want to install your headers into a directory named `headers` instead of `include` and the 2nd form gives you (and those installing your library) that control.
 Pay attention to those trailing backslahes next time you’re debugging install code!
 
-### 08/26/2022
+### 08/26/2022 Enable LTO (link-time optimization)
 Use `CMAKE_INTERPROCEDURAL_OPTIMIZATION` to easily enable link-time optimization (LTO) for a project. On the command line this looks like `-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON`. Hardcoding this for your project looks like `set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)`. CMake knows whether or not your compiler supports LTO so nothing should fail if your compiler does not support it.
 https://cmake.org/cmake/help/latest/variable/CMAKE_INTERPROCEDURAL_OPTIMIZATION.html
 
