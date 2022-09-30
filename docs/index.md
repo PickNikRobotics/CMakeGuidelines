@@ -1,6 +1,9 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 09/30/2022 Non-standalone projects
+Only add `cmake_minimum_required` and `project` calls if you plan on building that directory as a standalone project. There are valid reasons to do this within a project but generally speaking if you write `add_subdirectory(some_dir)` then you don’t need to include those two calls inside some_dir/CMakeLists.txt. At best this code is just a no-op. At worst it causes subtle bugs due to how `PROJECT_` prefixed variables and `CMAKE_` prefixed variables behave. (edited) 
+
 ### 09/06/2022 Stop quoting paths!
 I was given old “wisdom” that if you dereference a variable that contains a path (for example, `CMAKE_SOURCE_DIR`) and that path contains a space, that one variable will actually expand into two arguments which are both broken paths. **This is not true**. Clone a project into a directory with a space in it and nothing will break. It’s totally fine and not something you need to defend against.
 For example,
