@@ -1,6 +1,10 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 10/20/2022 Project Description
+The `project()` call includes many optional arguments including `DESCRIPTION` which does what you’d expect. It lets you specify a short string that describes the purpose of the project. This is useful for project like RSL which are an abbreviation for something longer so we put that whole name in the `DESCRIPTION` field. This also has the nice property of automatically appearing in your Doxygen docs since the `doxygen_add_docs` function checks the `PROJECT_DESCRIPTION` variable.
+![](rsl_description.png)
+
 ### 09/30/2022 Non-standalone projects
 Only add `cmake_minimum_required` and `project` calls if you plan on building that directory as a standalone project. There are valid reasons to do this within a project but generally speaking if you write `add_subdirectory(some_dir)` then you don’t need to include those two calls inside some_dir/CMakeLists.txt. At best this code is just a no-op. At worst it causes subtle bugs due to how `PROJECT_` prefixed variables and `CMAKE_` prefixed variables behave. (edited) 
 
