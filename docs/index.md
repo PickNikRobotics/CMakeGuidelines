@@ -1,6 +1,14 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 10/27/2022 Prefer linking over `Package_INCLUDE_DIRS`
+Always prefer linking to a 3rd party target over using `${Package_INCLUDE_DIRS}`.
+1. The target based approach is more generic and extensible. If a library author adds a new include directory or changes from a header-only to compiled library, you don’t care. Everything just keeps working.
+1. The variable-based solution is being phased out. Don’t be surprised if a variable-based workflow which used to work silently breaks since that variable is now empty after a major update to a library. CMake will let you dereference empty variables so it’s hard to know when this happens.
+1. CMake will error out if a target is missing or has the wrong name. Unlike the above problem, targets give you much stronger guarantees when things go wrong. If a target does not exist or you just spelled it wrong, configuration halts and you’re forced to fix it.
+1. Using targets avoids the extra hassle of using the `$<BUILD_INTERFACE>` generator expression in your `target_include_directories` call.
+1. It’s simply less code to write. Target names tend to be shorter than variable names but beyond that, you often have to use the variable based approach in at least two places, once for include dirs and once for link libraries.  Linking to a target is only needed once and you’re done.
+
 ### 10/20/2022 Project Description
 The `project()` call includes many optional arguments including `DESCRIPTION` which does what you’d expect. It lets you specify a short string that describes the purpose of the project. This is useful for project like RSL which are an abbreviation for something longer so we put that whole name in the `DESCRIPTION` field. This also has the nice property of automatically appearing in your Doxygen docs since the `doxygen_add_docs` function checks the `PROJECT_DESCRIPTION` variable.
 ![](rsl_description.png)
