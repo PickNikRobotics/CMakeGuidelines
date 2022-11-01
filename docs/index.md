@@ -1,6 +1,11 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 11/01/2022 Clean rebuilds
+CMake 3.24 adds a new `--fresh` flag which simplifies the process of doing clean rebuilds. This is the kind of feature you can use locally if you have 3.24 installed even if you’re working on a project whose minimum version is lower.  
+https://cmake.org/cmake/help/v3.24/manual/cmake.1.html#options  
+![](so_fresh.png)
+
 ### 10/27/2022 Prefer linking over `Package_INCLUDE_DIRS`
 Always prefer linking to a 3rd party target over using `${Package_INCLUDE_DIRS}`.
 1. The target based approach is more generic and extensible. If a library author adds a new include directory or changes from a header-only to compiled library, you don’t care. Everything just keeps working.
