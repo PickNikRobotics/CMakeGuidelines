@@ -1,6 +1,13 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 11/04/2022 No build type
+The lack of a build type is not a debug build.
+The `CMAKE_BUILD_TYPE` variable can have values like `Debug` or `Release` but it can also be blank. When it’s blank, CMake will not add flags like `-g`. It will simply omit those flags and you’ll end up using more of your compiler’s defaults.
+While the lack of a build type isn’t necessary a problem and should never break your build, I still recommend always setting a build type so you know what you’re getting.
+
+Notably, `CMAKE_BUILD_TYPE=None` is used by debian to inject build flags for packages.
+
 ### 11/01/2022 Clean rebuilds
 CMake 3.24 adds a new `--fresh` flag which simplifies the process of doing clean rebuilds. This is the kind of feature you can use locally if you have 3.24 installed even if you’re working on a project whose minimum version is lower.  
 https://cmake.org/cmake/help/v3.24/manual/cmake.1.html#options  
