@@ -1,6 +1,13 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 05/18/2023 Fake targets and namespacing
+This code will configure, compile, and link without errors:
+target_link_library(my-library PUBLIC this-target-absolute-does-not-exist)
+If you provide a link library without a namespace (in other words there is no :: in the name) CMake will first try to find a corresponding CMake target with that name. If it can’t find a CMake target, it will instead just add -lthis-target-absolute-does-not-exist to the linker line because that may in fact really be a library you have somewhere on your machine. In practice this means that a subtle misspelling of your target name can easily result in linker errors.
+Conversely, if you use a namespaced target name and CMake cannot find that target, configuration fails. That means you find and fix these bugs much faster. As library authors this means adding a namespace to the targets in your export set and also providing an ALIAS target so that anyone consuming your library via add_subdirectory can use that namespaced target name as well.
+Discussed in [this talk](https://www.youtube.com/watch?v=gN17Q13WLXM)
+
 ### 11/04/2022 No build type
 The lack of a build type is not a debug build.
 The `CMAKE_BUILD_TYPE` variable can have values like `Debug` or `Release` but it can also be blank. When it’s blank, CMake will not add flags like `-g`. It will simply omit those flags and you’ll end up using more of your compiler’s defaults.
