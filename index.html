@@ -1,0 +1,689 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="references/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>CMakeGuidelines</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cmakeguidelines" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="CMakeGuidelines" class="md-header__button md-logo" aria-label="CMakeGuidelines" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CMakeGuidelines
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="CMakeGuidelines" class="md-nav__button md-logo" aria-label="CMakeGuidelines" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    CMakeGuidelines
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#12062023-superfluous-generator-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      12/06/2023 Superfluous generator expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05182023-fake-targets-and-namespacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      05/18/2023 Fake targets and namespacing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11042022-no-build-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      11/04/2022 No build type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11012022-clean-rebuilds" class="md-nav__link">
+    <span class="md-ellipsis">
+      11/01/2022 Clean rebuilds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10272022-prefer-linking-over-package_include_dirs" class="md-nav__link">
+    <span class="md-ellipsis">
+      10/27/2022 Prefer linking over Package_INCLUDE_DIRS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10202022-project-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      10/20/2022 Project Description
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09302022-non-standalone-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      09/30/2022 Non-standalone projects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09062022-stop-quoting-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      09/06/2022 Stop quoting paths!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08292022-use-trailing-forward-slashes-with-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/29/2022 Use trailing forward slashes with intent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08262022-enable-lto-link-time-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/26/2022 Enable LTO (link-time optimization)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08242022-listappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/24/2022 list(APPEND
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08152022-generateexportheader" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/15/2022 GenerateExportHeader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08112022-cmake_-vs-project_" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/11/2022 CMAKE_ vs PROJECT_
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08102022-endif-conditional" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/10/2022 endif conditional
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#12062023-superfluous-generator-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      12/06/2023 Superfluous generator expressions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05182023-fake-targets-and-namespacing" class="md-nav__link">
+    <span class="md-ellipsis">
+      05/18/2023 Fake targets and namespacing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11042022-no-build-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      11/04/2022 No build type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11012022-clean-rebuilds" class="md-nav__link">
+    <span class="md-ellipsis">
+      11/01/2022 Clean rebuilds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10272022-prefer-linking-over-package_include_dirs" class="md-nav__link">
+    <span class="md-ellipsis">
+      10/27/2022 Prefer linking over Package_INCLUDE_DIRS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10202022-project-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      10/20/2022 Project Description
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09302022-non-standalone-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      09/30/2022 Non-standalone projects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#09062022-stop-quoting-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      09/06/2022 Stop quoting paths!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08292022-use-trailing-forward-slashes-with-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/29/2022 Use trailing forward slashes with intent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08262022-enable-lto-link-time-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/26/2022 Enable LTO (link-time optimization)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08242022-listappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/24/2022 list(APPEND
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08152022-generateexportheader" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/15/2022 GenerateExportHeader
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08112022-cmake_-vs-project_" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/11/2022 CMAKE_ vs PROJECT_
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#08102022-endif-conditional" class="md-nav__link">
+    <span class="md-ellipsis">
+      08/10/2022 endif conditional
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="cmakeguidelines">CMakeGuidelines</h1>
+<p>Collection of useful cmake tips.</p>
+<h3 id="12062023-superfluous-generator-expressions">12/06/2023 Superfluous generator expressions</h3>
+<p>All that <code>$&lt;BUILD_INTERFACE:…&gt;</code> and <code>$&lt;INSTALL_INTERFACE:…&gt;</code> stuff is only needed for libraries you are installing. Do not copy-paste that stuff onto your executable targets. That includes tests. Even if you install an executable you don’t need these generator expressions. Installed executables have no notion of include directories so you can use the much simpler form of target_include_directories which omits these.</p>
+<h3 id="05182023-fake-targets-and-namespacing">05/18/2023 Fake targets and namespacing</h3>
+<p>This code will configure, compile, and link without errors:
+target_link_library(my-library PUBLIC this-target-absolute-does-not-exist)
+If you provide a link library without a namespace (in other words there is no :: in the name) CMake will first try to find a corresponding CMake target with that name. If it can’t find a CMake target, it will instead just add -lthis-target-absolute-does-not-exist to the linker line because that may in fact really be a library you have somewhere on your machine. In practice this means that a subtle misspelling of your target name can easily result in linker errors.
+Conversely, if you use a namespaced target name and CMake cannot find that target, configuration fails. That means you find and fix these bugs much faster. As library authors this means adding a namespace to the targets in your export set and also providing an ALIAS target so that anyone consuming your library via add_subdirectory can use that namespaced target name as well.
+Discussed in <a href="https://www.youtube.com/watch?v=gN17Q13WLXM">this talk</a></p>
+<h3 id="11042022-no-build-type">11/04/2022 No build type</h3>
+<p>The lack of a build type is not a debug build.
+The <code>CMAKE_BUILD_TYPE</code> variable can have values like <code>Debug</code> or <code>Release</code> but it can also be blank. When it’s blank, CMake will not add flags like <code>-g</code>. It will simply omit those flags and you’ll end up using more of your compiler’s defaults.
+While the lack of a build type isn’t necessary a problem and should never break your build, I still recommend always setting a build type so you know what you’re getting.</p>
+<p>Notably, <code>CMAKE_BUILD_TYPE=None</code> is used by debian to inject build flags for packages.</p>
+<h3 id="11012022-clean-rebuilds">11/01/2022 Clean rebuilds</h3>
+<p>CMake 3.24 adds a new <code>--fresh</code> flag which simplifies the process of doing clean rebuilds. This is the kind of feature you can use locally if you have 3.24 installed even if you’re working on a project whose minimum version is lower.<br />
+https://cmake.org/cmake/help/v3.24/manual/cmake.1.html#options<br />
+<img alt="" src="so_fresh.png" /></p>
+<h3 id="10272022-prefer-linking-over-package_include_dirs">10/27/2022 Prefer linking over <code>Package_INCLUDE_DIRS</code></h3>
+<p>Always prefer linking to a 3rd party target over using <code>${Package_INCLUDE_DIRS}</code>.
+1. The target based approach is more generic and extensible. If a library author adds a new include directory or changes from a header-only to compiled library, you don’t care. Everything just keeps working.
+1. The variable-based solution is being phased out. Don’t be surprised if a variable-based workflow which used to work silently breaks since that variable is now empty after a major update to a library. CMake will let you dereference empty variables so it’s hard to know when this happens.
+1. CMake will error out if a target is missing or has the wrong name. Unlike the above problem, targets give you much stronger guarantees when things go wrong. If a target does not exist or you just spelled it wrong, configuration halts and you’re forced to fix it.
+1. Using targets avoids the extra hassle of using the <code>$&lt;BUILD_INTERFACE&gt;</code> generator expression in your <code>target_include_directories</code> call.
+1. It’s simply less code to write. Target names tend to be shorter than variable names but beyond that, you often have to use the variable based approach in at least two places, once for include dirs and once for link libraries.  Linking to a target is only needed once and you’re done.</p>
+<h3 id="10202022-project-description">10/20/2022 Project Description</h3>
+<p>The <code>project()</code> call includes many optional arguments including <code>DESCRIPTION</code> which does what you’d expect. It lets you specify a short string that describes the purpose of the project. This is useful for project like RSL which are an abbreviation for something longer so we put that whole name in the <code>DESCRIPTION</code> field. This also has the nice property of automatically appearing in your Doxygen docs since the <code>doxygen_add_docs</code> function checks the <code>PROJECT_DESCRIPTION</code> variable.
+<img alt="" src="rsl_description.png" /></p>
+<h3 id="09302022-non-standalone-projects">09/30/2022 Non-standalone projects</h3>
+<p>Only add <code>cmake_minimum_required</code> and <code>project</code> calls if you plan on building that directory as a standalone project. There are valid reasons to do this within a project but generally speaking if you write <code>add_subdirectory(some_dir)</code> then you don’t need to include those two calls inside some_dir/CMakeLists.txt. At best this code is just a no-op. At worst it causes subtle bugs due to how <code>PROJECT_</code> prefixed variables and <code>CMAKE_</code> prefixed variables behave. (edited) </p>
+<h3 id="09062022-stop-quoting-paths">09/06/2022 Stop quoting paths!</h3>
+<p>I was given old “wisdom” that if you dereference a variable that contains a path (for example, <code>CMAKE_SOURCE_DIR</code>) and that path contains a space, that one variable will actually expand into two arguments which are both broken paths. <strong>This is not true</strong>. Clone a project into a directory with a space in it and nothing will break. It’s totally fine and not something you need to defend against.
+For example,</p>
+<pre><code>install(DIRECTORY include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        COMPONENT mylib_headers)
+</code></pre>
+<p>There is no need to put quotes around <code>${CMAKE_INSTALL_INCLUDEDIR}</code>. I’d go ever farther to actively recommend against adding those quotes because it reinforces that old school paranoia and makes it harder to know when quotes are truly necessary. When I see quotes in CMake I expect that’s because the quotes are provably required because in some instances they are actually very important.</p>
+<h3 id="08292022-use-trailing-forward-slashes-with-intent">08/29/2022 Use trailing forward slashes with intent</h3>
+<p>Trailing slashes on paths are sometimes very meaningful. Take the two snippets</p>
+<pre><code>install(DIRECTORY include
+        DESTINATION .
+        COMPONENT libname_headers)
+</code></pre>
+<pre><code>install(DIRECTORY include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        COMPONENT libname_headers)
+</code></pre>
+<p>The first snippet installs the <code>include</code> directory <em>including a directory named</em> <code>include</code>.
+The second snippets installs the contents of the <code>include</code> directory but not the <code>include</code> directory itself. Both examples will do what you want the latter is preferable since it gives you more control over the directory into which your headers get installed. For all I know you want to install your headers into a directory named <code>headers</code> instead of <code>include</code> and the 2nd form gives you (and those installing your library) that control.
+Pay attention to those trailing backslahes next time you’re debugging install code!</p>
+<h3 id="08262022-enable-lto-link-time-optimization">08/26/2022 Enable LTO (link-time optimization)</h3>
+<p>Use <code>CMAKE_INTERPROCEDURAL_OPTIMIZATION</code> to easily enable link-time optimization (LTO) for a project. On the command line this looks like <code>-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON</code>. Hardcoding this for your project looks like <code>set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)</code>. CMake knows whether or not your compiler supports LTO so nothing should fail if your compiler does not support it.
+https://cmake.org/cmake/help/latest/variable/CMAKE_INTERPROCEDURAL_OPTIMIZATION.html</p>
+<h3 id="08242022-listappend">08/24/2022 <code>list(APPEND</code></h3>
+<p>Use <code>list(APPEND</code> to add elements to a list like so</p>
+<pre><code>set(MY_VARIABLE element1)
+...
+list(APPEND MY_VARIABLE element2 element3)
+</code></pre>
+<p>over the more verbose alternative</p>
+<pre><code>set(MY_VARIABLE element1)
+...
+set(MY_VARIABLE ${MY_VARIABLE} element2 element3)
+</code></pre>
+<p>Don’t repeat yourself if you don’t need to!
+I’ll also briefly mention <code>list(PREPEND</code> if you need to prepend instead of append to a list. <code>list</code> has tons of options for manipulating lists that are all better than trying to re-implement it by hand with lots of set calls.</p>
+<h3 id="08152022-generateexportheader">08/15/2022 <code>GenerateExportHeader</code></h3>
+<p>Use the <a href="https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html">GenerateExportHeader</a> module to generate a header that defines macros for symbol export. GCC and Clang export all symbols by default but if you want better control over what symbols are public in your .so, you need to use non-portable compile attributes to specify that. This CMake module automates a lot of the busy work required to generate those macros and does so in a way that works on all platforms, including Windows.
+I’ve used this before and it’s not too hard to get set up with. I’d definitely recommend this if you’re hardcore about not letter users depend on implementation details.</p>
+<h3 id="08112022-cmake_-vs-project_">08/11/2022 <code>CMAKE_</code> vs <code>PROJECT_</code></h3>
+<p>When two variables have the same name but one has a <code>CMAKE_</code> prefix and the other a <code>PROJECT_</code> prefix, the difference is that the <code>CMAKE_</code> prefixed version refers to the top level project. The <code>PROJECT_</code> prefixed version refers to the whatever project is currently being configured. They often mean the same thing but they’re different when you have projects inside projects like through the use of git submodules or using <code>FetchContent</code> to bring it outside projects.
+For example, <code>PROJECT_SOURCE_DIR</code> is the root of the project currently being configured. If you’re writing a library, this is usually what you should be using since you can be certain that it will always refer to the root of your library even if someone takes your project and puts it inside their project. <code>CMAKE_SOURCE_DIR</code> refers to the top level CMakeListst.xt file that was passed to <code>cmake</code>. When you run <code>cmake -S. -B build</code> you’re saying the current directory is the <code>CMAKE_SOURCE_DIR</code>. Within that CMakeLists.txt you can add as many outside projects as you like and each outside project will have a different <code>PROJECT_SOURCE_DIR</code> but <code>CMAKE_SOURCE_DIR</code> will only ever refer to the same directory no matter where it’s used.</p>
+<h3 id="08102022-endif-conditional">08/10/2022 <code>endif</code> conditional</h3>
+<p>Do this</p>
+<pre><code>if(SOME_CONDITION)
+   ...
+endif()
+</code></pre>
+<p>not this</p>
+<pre><code>if(SOME_CONDITION)
+   ...
+endif(SOME_CONDITION)
+</code></pre>
+<p>Surprisingly the 2nd form is valid and behaves the same as the first. There’s no good reason to be repeating yourself in the endif call. It’s entirely unnecessary and just makes the code harder to read and maintain.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>
