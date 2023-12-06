@@ -1,6 +1,9 @@
 # CMakeGuidelines
 Collection of useful cmake tips.
 
+### 12/06/2023 Superfluous generator expressions
+All that `$<BUILD_INTERFACE:…>` and `$<INSTALL_INTERFACE:…>` stuff is only needed for libraries you are installing. Do not copy-paste that stuff onto your executable targets. That includes tests. Even if you install an executable you don’t need these generator expressions. Installed executables have no notion of include directories so you can use the much simpler form of target_include_directories which omits these.
+
 ### 05/18/2023 Fake targets and namespacing
 This code will configure, compile, and link without errors:
 target_link_library(my-library PUBLIC this-target-absolute-does-not-exist)
